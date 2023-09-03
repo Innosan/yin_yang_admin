@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Overpass';
+    src: url('/fonts/Overpass-VariableFont_wght.ttf')
+}
+html, input, button {
+    font-family: Overpass, sans-serif;
+}
