@@ -11,4 +11,7 @@ body {
     margin: 0 auto;
     padding: 40px;
     max-width: 1240px;
+
+	display: flex;
+	gap: 76px;
 }
