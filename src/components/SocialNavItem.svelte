@@ -14,6 +14,7 @@ export let iconPath, url, title
 		padding: 10px;
 		opacity: .8;
 		transition: .3s;
+
 		&:hover {
 			opacity: 1;
 		}
