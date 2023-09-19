@@ -1,4 +1,4 @@
-import {writable, get} from 'svelte/store'
+import { writable } from 'svelte/store'
 import { supabase } from "$lib/supabaseClient";
 
 export const orders = writable([])
@@ -17,10 +17,13 @@ const mySubscription = supabase
 export const loadOrders = async () => {
 	const { data} = await supabase
 		.from(tableName)
-		.select('*, user_id ( first_name, last_name ), order_item ( quantity, product_id (*))')
+		.select('' +
+			'*,' +
+			' user_id ( first_name, last_name ),' +
+			' order_item ( quantity, product_id ( * )),' +
+			' status_id ( * )'
+		)
 		.order('created_at')
 
 	orders.set(data)
-
-	console.log(data)
 }

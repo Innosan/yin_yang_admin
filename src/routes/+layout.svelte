@@ -12,6 +12,10 @@
     import PageContainer from "../components/PageContainer.svelte";
     import Header from "../components/Header/Header.svelte";
 	import SocialNavItem from "../components/SocialNavItem.svelte";
+
+    import { loadOrders, orders } from "../stores/ordersStore";
+
+    loadOrders()
 </script>
 
 <main class="layout">
@@ -53,7 +57,10 @@
 
 <style>
 	.left-menu {
+		height: min-content;
 		min-width: 364px;
+		position: sticky;
+		top: 120px;
 	}
 
 	.current-orders {

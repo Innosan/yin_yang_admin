@@ -1,5 +1,8 @@
-<script>
-export let iconPath, url, title
+<script lang="ts">
+export let
+	iconPath: string,
+	url: string,
+	title: string
 </script>
 
 <a href="{url}">
