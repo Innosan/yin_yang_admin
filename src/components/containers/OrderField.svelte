@@ -11,7 +11,13 @@
     div {
         display: flex;
         gap: 12px;
+        align-items: center;
 
-        opacity: .8;
+        opacity: .6;
+    }
+
+    p {
+        font-size: 22px;
+        font-weight: 700;
     }
 </style>

@@ -8,12 +8,13 @@
 
 {#each data.products as product}
 	<ProductCard
-		image="{product.image_url}"
+		id={product.id}
 		title="{product.title}"
 		description="{product.description}"
+		image="{product.image_url}"
+		count="{product.count}"
 		price="{product.price}"
 		weight="{product.weight}"
-		count="{product.count}"
 		categoryId="{product.category_id}"
 	/>
 {/each}

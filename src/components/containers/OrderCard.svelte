@@ -1,6 +1,8 @@
 <script>
 	import OrderField from "./OrderField.svelte";
 	import { supabase } from "$lib/supabaseClient";
+	import { formatDate } from "$lib/utils/dateFormatter";
+
 
     export let id, createdAt, user, orderItems, deliveryData, status
 
@@ -31,11 +33,11 @@
 		<div>
 			<p>Order #{id}</p>
 			<p>Status {status.title}</p>
-			<p>Status {status.id}</p>
+
 			<OrderField
 				iconPath="/icons/ic_delivery_time.svg"
 				fieldTitle="Время заказа"
-				fieldContent={createdAt}
+				fieldContent={formatDate(createdAt)}
 			/>
 			<OrderField
 				iconPath="/icons/ic_user_name.svg"
@@ -55,6 +57,7 @@
 		</div>
 		<div>
 			<p>Заказано</p>
+
 			{#each orderItems as orderItem}
 				<table>
 					<tr>
