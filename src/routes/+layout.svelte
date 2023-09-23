@@ -11,16 +11,11 @@
      */
     import PageContainer from "../components/PageContainer.svelte";
     import Header from "../components/Header/Header.svelte";
+	import DeliveryHub from "../components/DeliveryHub.svelte";
 
 	import {fly} from "svelte/transition";
 
-
-	import {
-		loadOrders,
-		orders,
-	} from "../stores/ordersStore";
-
-	import DeliveryHub from "../components/DeliveryHub.svelte";
+	import { loadOrders, orders } from "../stores/ordersStore";
 
     loadOrders()
 
@@ -35,8 +30,9 @@
 		/>
 		{#key data.url}
 			<div
-				in:fly={{ x: -200, duration: 400, delay: 200 }}
-				out:fly={{ x: 200, duration: 200,}}
+				in:fly={{ x: 50, duration: 400, delay: 200 }}
+				out:fly={{ x: -50, duration: 200,}}
+				class="container small"
 			>
 				<slot/>
 			</div>
@@ -45,5 +41,7 @@
 </main>
 
 <style>
-
+	.small {
+		padding: 0;
+	}
 </style>

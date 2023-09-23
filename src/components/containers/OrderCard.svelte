@@ -70,7 +70,10 @@
 			{/each}
 		</div>
 	</div>
-	<p>{deliveryData.note}</p>
+	<div class="order-note">
+		<img src="/icons/ic_note.svg" alt="">
+		<p>{deliveryData.note}</p>
+	</div>
 </div>
 
 <style lang="scss">
@@ -87,13 +90,11 @@
 
 		&:hover {
 			box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
-
 		}
 	}
 
 	.order-details {
 		display: flex;
-
 	}
 
 	.active {
@@ -124,6 +125,18 @@
 
 	.order-block-title {
 		font-size: 34px;
+		font-weight: 900;
+	}
+
+	.order-note {
+		display: flex;
+		gap: 12px;
+		border-radius: 16px;
+		background: #333;
+		padding: 16px;
+		align-items: center;
+		color: #FFF;
+		font-size: 18px;
 		font-weight: 900;
 	}
 </style>

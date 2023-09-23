@@ -1,10 +1,13 @@
 <script lang="ts">
 import {page} from "$app/stores";
+
 import {
 	deliveringOrders,
 	forDeliveryOrders,
 	selfPickedOrders
 } from "../stores/ordersStore";
+import { filter } from "../stores/filterStore.js";
+
 import SocialNavItem from "./SocialNavItem.svelte";
 
 export let ordersLength
@@ -17,12 +20,16 @@ export let ordersLength
 			<p>В работе {ordersLength} заказ!</p>
 		</div>
 		<div>
-			<button>
-				{$selfPickedOrders} самовывоз
-			</button>
-			<button>
-				{$forDeliveryOrders} доставка
-			</button>
+			<a href="/orders">
+				<button on:click={() => filter.set(7)}>
+					{$selfPickedOrders} самовывоз
+				</button>
+			</a>
+			<a href="/orders">
+				<button on:click={() => filter.set(1)}>
+					{$forDeliveryOrders} доставка
+				</button>
+			</a>
 		</div>
 	</div>
 	<div class="delivering">
