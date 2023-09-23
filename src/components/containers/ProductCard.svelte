@@ -1,34 +1,83 @@
 <script lang="ts">
 	import { supabase } from "$lib/supabaseClient";
 	import Dialog from "../Dialog.svelte";
+	import EditableField from "../EditableField.svelte";
 
 	export let id, title, description, image, count, price, weight, categoryId;
 
-	let isContentEdited = false;
 	let isDialogOpened = false;
-
-	function handleTextareaChange(event, field) {
-		isContentEdited = event.target.value !== field;
-	}
+	let isAnyFieldEdited = false
+	let editedFields = {};
 
 	async function deleteProduct(productId) {
-		const {data} = await supabase.from('product').delete().eq('id', productId)
+		const { data } = await supabase.from('product').delete().eq('id', productId)
+	}
+
+	function handleEdit(event) {
+		const { fieldId, isFieldEdited } = event.detail;
+
+		editedFields[fieldId] = isFieldEdited;
+		isAnyFieldEdited = Object.values(editedFields).some(edited => edited);
 	}
 </script>
 
 <div>
 	<img src={image} alt="">
-	<input type="text" value={title} on:input={handleTextareaChange(event, title)}>
 
-	<input type="text" value={count} on:input={handleTextareaChange(event, count)}>
-	<input type="text" value={price} on:input={handleTextareaChange(event, price)}>
-	<input type="text" value={weight} on:input={handleTextareaChange(event, weight)}>
-	<input type="text" value={categoryId} on:input={handleTextareaChange(event, categoryId)}>
-	<input type="text" value={description} on:input={handleTextareaChange(event, description)}>
+	<form action="get">
+		<EditableField
+			fieldValue={title}
+			fieldId="title"
+			fieldLabel="Название"
+			fieldType="text"
+			on:edit={handleEdit}
+		/>
+		<EditableField
+			fieldValue={count}
+			fieldId="count"
+			fieldLabel="Кол-во"
+			fieldType="text"
+			hasSuffix={true}
+			suffixTitle="шт."
+			on:edit={handleEdit}
+		/>
+		<EditableField
+			fieldValue={price}
+			fieldId="price"
+			fieldLabel="Цена"
+			fieldType="text"
+			hasSuffix={true}
+			suffixTitle="₽"
+			on:edit={handleEdit}
+		/>
+		<EditableField
+			fieldValue={weight}
+			fieldId="weight"
+			fieldLabel="Вес"
+			fieldType="text"
+			hasSuffix={true}
+			suffixTitle="гр."
+			on:edit={handleEdit}
+		/>
+		<EditableField
+			fieldValue={categoryId}
+			fieldId="category"
+			fieldLabel="Категория"
+			fieldType="text"
+			on:edit={handleEdit}
+		/>
+		<EditableField
+			fieldValue={description}
+			fieldId="description"
+			fieldLabel="Опиание"
+			fieldType="text"
+			on:edit={handleEdit}
+		/>
+	</form>
 
 	<div>
 		<button on:click={() => isDialogOpened = true}>Удалить</button>
-		<button disabled={!isContentEdited}>Обновить</button>
+		<button disabled={!isAnyFieldEdited}>Обновить</button>
 	</div>
 
 	<Dialog
@@ -42,7 +91,7 @@
 	/>
 </div>
 
-<style>
+<style lang="scss">
 	img {
 		width: 50%;
 	}
@@ -52,5 +101,13 @@
 		padding: 10px;
 		margin-bottom: 10px;
 		border-radius: 12px;
+
+		&:has(img) {
+			display: flex;
+			flex-direction: column;
+
+			width: 320px;
+			gap: 20px;
+		}
 	}
 </style>
