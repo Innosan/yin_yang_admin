@@ -11,65 +11,39 @@
      */
     import PageContainer from "../components/PageContainer.svelte";
     import Header from "../components/Header/Header.svelte";
-	import SocialNavItem from "../components/SocialNavItem.svelte";
 
-    import { loadOrders, orders } from "../stores/ordersStore";
+	import {fly} from "svelte/transition";
+
+
+	import {
+		loadOrders,
+		orders,
+	} from "../stores/ordersStore";
+
+	import DeliveryHub from "../components/DeliveryHub.svelte";
 
     loadOrders()
+
+	export let data
 </script>
 
 <main class="layout">
     <Header/>
 	<PageContainer>
-		<div class="left-menu">
-			<div class="current-orders">
-				<div>
-					<img src="/icons/ic_info.svg" alt="Info icon">
-					<p>В работе 3 заказа!</p>
-				</div>
-				<div>
-					<p>1 на самовывоз</p>
-					<p>2 на доставку</p>
-				</div>
+		<DeliveryHub
+			ordersLength={$orders.length}
+		/>
+		{#key data.url}
+			<div
+				in:fly={{ x: -200, duration: 400, delay: 200 }}
+				out:fly={{ x: 200, duration: 200,}}
+			>
+				<slot/>
 			</div>
-			<div class="delivering">
-				<img src="/icons/ic_delivery.svg" alt="Delivery icon">
-				<p>Доставляется 1 заказ</p>
-			</div>
-			<div>
-				<SocialNavItem
-					url="https://web.telegram.org/k/"
-					iconPath="/icons/ic_telegram.svg"
-					title="Telegram"
-				/>
-				<SocialNavItem
-					url="https://web.telegram.org/k/"
-					iconPath="/icons/ic_kassa.svg"
-					title="Yu Kassa"
-				/>
-			</div>
-		</div>
-		<div>
-			<slot/>
-		</div>
+		{/key}
 	</PageContainer>
 </main>
 
 <style>
-	.left-menu {
-		height: min-content;
-		min-width: 364px;
-		position: sticky;
-		top: 120px;
-	}
 
-	.current-orders {
-		border-radius: 15px;
-		background: #E44857;
-	}
-
-	.delivering {
-		border-radius: 15px;
-		background: #E44857;
-	}
 </style>

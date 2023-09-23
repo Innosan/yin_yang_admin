@@ -3,7 +3,6 @@
 	import { supabase } from "$lib/supabaseClient";
 	import { formatDate } from "$lib/utils/dateFormatter";
 
-
     export let id, createdAt, user, orderItems, deliveryData, status
 
 	async function changeStatus(orderId, statusId) {
@@ -15,7 +14,7 @@
 </script>
 
 <div class="container">
-	<div>
+	<div class="status-container">
 		<button class:active={status.id === 1} on:click={changeStatus(id, 1)}>
 			Новый
 		</button>
@@ -31,8 +30,7 @@
 	</div>
 	<div class="order-details">
 		<div>
-			<p>Order #{id}</p>
-			<p>Status {status.title}</p>
+			<p class="order-block-title">Заказ #{id}</p>
 
 			<OrderField
 				iconPath="/icons/ic_delivery_time.svg"
@@ -56,7 +54,7 @@
 			/>
 		</div>
 		<div>
-			<p>Заказано</p>
+			<p class="order-block-title">Заказано</p>
 
 			{#each orderItems as orderItem}
 				<table>
@@ -80,6 +78,8 @@
 		padding: 30px 50px;
 		flex-direction: column;
 
+		gap: 40px;
+
 		border-radius: 20px;
 
 		box-shadow: 0 0 10px 0 rgba(0,0,0,0.45);
@@ -97,6 +97,33 @@
 	}
 
 	.active {
-		background-color: red;
+		background-color: #E44857 !important;
+		opacity: 1 !important;
+	}
+
+	.status-container {
+		border-radius: 14px;
+		background: rgba(0, 0, 0, 0.80);
+
+		button {
+			padding: 12px 30px;
+			color: #FFF;
+
+			font-size: 18px;
+			font-weight: 900;
+
+			opacity: .7;
+
+			transition: .3s;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	.order-block-title {
+		font-size: 34px;
+		font-weight: 900;
 	}
 </style>

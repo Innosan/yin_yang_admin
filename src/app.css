@@ -15,3 +15,12 @@ body {
 	display: flex;
 	gap: 76px;
 }
+
+.small {
+	padding: 16px;
+	max-width: unset;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin: unset;
+}

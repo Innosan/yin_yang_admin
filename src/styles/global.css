@@ -5,3 +5,10 @@ p, h1 {
 h1 {
 	font-size: 56px;
 }
+
+button {
+	border: none;
+	border-radius: 14px;
+	background-color: transparent;
+	cursor: pointer;
+}

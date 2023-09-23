@@ -18,6 +18,18 @@
 </div>
 
 <div>
+	{#if selectedFilter === 8}
+		{#each $orders as order}
+			<OrderCard
+				id={order.id}
+				status={{title: order.status_id.title, id: order.status_id.id}}
+				createdAt={order.created_at}
+				user={order.user_id}
+				orderItems={order.order_item}
+				deliveryData={{note: order.delivery_note, address: order.delivery_address}}
+			/>
+		{/each}
+	{:else}
 	{#each $orders.filter(order => { return order.status_id.id === selectedFilter }) as order}
 		<OrderCard
 				id={order.id}
@@ -28,6 +40,7 @@
 				deliveryData={{note: order.delivery_note, address: order.delivery_address}}
 		/>
 	{/each}
+	{/if}
 </div>
 
 <style>

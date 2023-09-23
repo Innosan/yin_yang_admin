@@ -2,6 +2,10 @@ import { writable } from 'svelte/store'
 import { supabase } from "$lib/supabaseClient";
 
 export const orders = writable([])
+export const forDeliveryOrders = writable(0)
+export const selfPickedOrders = writable(0)
+export const deliveringOrders = writable(0)
+
 let tableName = 'order'
 
 const mySubscription = supabase
@@ -26,4 +30,8 @@ export const loadOrders = async () => {
 		.order('created_at')
 
 	orders.set(data)
+
+	deliveringOrders.set(data.filter((order) => { return order.status_id.id === 2}).length)
+	selfPickedOrders.set(data.filter((order) => { return order.status_id.id === 7}).length)
+	forDeliveryOrders.set(data.filter((order) => { return order.status_id.id !== 7}).length)
 }
