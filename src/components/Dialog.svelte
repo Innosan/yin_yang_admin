@@ -1,11 +1,18 @@
 <script lang="ts">
-    export let actionTitle: string, dialogState: boolean, onClose, onAccept
+    export let actionTitle, showModal;
+
+	let dialog;
+	$: if (dialog && showModal) dialog.showModal();
 </script>
 
-<dialog open={dialogState}>
+<dialog
+	bind:this={dialog}
+	on:close={() => (showModal = false)}
+	on:click|self={() => dialog.close()}
+>
     <p>{actionTitle}</p>
-    <button on:click={onAccept}>Да</button>
-    <button on:click={onClose}>Нет</button>
+    <button>Да</button>
+	<button autofocus on:click={() => dialog.close()}>Нет</button>
 </dialog>
 
 <style>

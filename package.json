@@ -21,6 +21,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^2.33.1"
+		"@supabase/supabase-js": "^2.33.1",
+		"@zerodevx/svelte-toast": "^0.9.5"
 	}
 }

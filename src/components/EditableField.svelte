@@ -14,7 +14,7 @@
 
 	function handleFieldChange(event) {
 		isFieldEdited = event.target.value.toString() !== fieldValue.toString()
-		dispatch('edit', { fieldId, isFieldEdited })
+		dispatch('edit', { fieldId, isFieldEdited, fieldData: event.target.value })
 	}
 </script>
 
@@ -26,6 +26,7 @@
 			type={fieldType}
 			value={fieldValue}
 			id={fieldId}
+			name={fieldId}
 
 			class:edited={isFieldEdited}
 			on:input={handleFieldChange}

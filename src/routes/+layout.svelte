@@ -5,6 +5,7 @@
     import '../app.css'
     import '../styles/global.css'
     import '../styles/font.css'
+    import '../styles/toast.css'
 
     /*
     Components
@@ -16,10 +17,18 @@
 	import {fly} from "svelte/transition";
 
 	import { loadOrders, orders } from "../stores/ordersStore";
+	import { loadProducts } from "../stores/productsStore";
+	import {SvelteToast} from "@zerodevx/svelte-toast";
 
     loadOrders()
+    loadProducts()
 
 	export let data
+
+	const options = {
+		reversed: true,
+		intro: { y: 192 }
+	}
 </script>
 
 <main class="layout">
@@ -39,6 +48,8 @@
 		{/key}
 	</PageContainer>
 </main>
+
+<SvelteToast {options} />
 
 <style>
 	.small {

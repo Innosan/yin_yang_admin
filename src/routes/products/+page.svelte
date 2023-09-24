@@ -1,13 +1,13 @@
 <script>
-	import ProductCard from "../../components/containers/ProductCard.svelte";
+	import {products} from "../../stores/productsStore";
 
-	export let data;
+	import ProductCard from "../../components/containers/ProductCard.svelte";
 </script>
 
 <h1>Продукты</h1>
 
 <div class="container small">
-	{#each data.products as product}
+	{#each $products as product}
 		<ProductCard
 			id={product.id}
 			title="{product.title}"

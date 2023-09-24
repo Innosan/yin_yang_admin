@@ -12,7 +12,7 @@ const mySubscription = supabase
 	.channel('orders-channel')
 	.on(
 		'postgres_changes',
-		{ event: '*', schema: 'public', table: 'order' },
+		{ event: '*', schema: 'public', table: tableName },
 		payload => {
 			loadOrders()
 		})
